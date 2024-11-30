@@ -15,13 +15,18 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/lessons")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class LessonController {
 
     private final ILessonService service;
 
-    @Qualifier("lessonModelMapper")
+    // @Qualifier("lessonModelMapper")
     private final ModelMapper modelMapper;
+
+    public LessonController(ILessonService service, @Qualifier("lessonModelMapper") ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
     public Flux<LessonDTO> readAll() {

@@ -15,13 +15,18 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/courses")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor // manual injection by docker conflicts
 public class CourseController {
 
     private final ICourseService service;
 
-    @Qualifier("courseModelMapper")
+    // @Qualifier("courseModelMapper")
     private final ModelMapper modelMapper;
+
+    public CourseController(ICourseService service, @Qualifier("courseModelMapper") ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
     public Flux<CourseDTO> readAll() {

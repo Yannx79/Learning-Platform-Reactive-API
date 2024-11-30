@@ -2,6 +2,7 @@ package com.nk.learningplatformreactiveapi.controllers;
 
 import com.nk.learningplatformreactiveapi.dto.QuizDTO;
 import com.nk.learningplatformreactiveapi.entities.QuizEntity;
+import com.nk.learningplatformreactiveapi.services.ILessonService;
 import com.nk.learningplatformreactiveapi.services.IQuizService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,18 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/quizzes")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class QuizController {
 
     private final IQuizService service;
 
-    @Qualifier("quizModelMapper")
+    // @Qualifier("quizModelMapper")
     private final ModelMapper modelMapper;
+
+    public QuizController(IQuizService service, @Qualifier("quizModelMapper") ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
     public Flux<QuizDTO> readAll() {
