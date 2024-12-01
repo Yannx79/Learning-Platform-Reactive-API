@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+
+  spring-api-image:
+    # image: nk-learning-platform-reactive-api:latest
+    # image: yan640/nk-learning-platform-reactive-api:lastest
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: nk-learning-platform-reactive-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    networks:
+      - spring-network
+    depends_on:
+      - mysql
+    # environment:
+    #   - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_e_learning_platform
+    #   - SPRING_DATASOURCE_USERNAME=nk-yannick
+    #   - SPRING_DATASOURCE_PASSWORD=101010
+    # restart: on-failure
+
+  mysql:
+    image: mysql
+    container_name: nk-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_e_learning_platform
+      MYSQL_USER: nk-yannick
+      MYSQL_PASSWORD: 101010
+    ports:
+      - "3307:3306"
+    networks:
+      - spring-network
+    volumes:
+      - mysql-volume:/var/lib/mysql
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./init-db-scripts:/docker-entrypoint-initdb.d
+    restart: on-failure
+
+networks:
+  spring-network:
+    driver: bridge
+
+volumes:
+  mysql-volume:
