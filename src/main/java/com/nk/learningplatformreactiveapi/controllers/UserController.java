@@ -2,6 +2,7 @@ package com.nk.learningplatformreactiveapi.controllers;
 
 import com.nk.learningplatformreactiveapi.dto.UserDTO;
 import com.nk.learningplatformreactiveapi.entities.UserEntity;
+import com.nk.learningplatformreactiveapi.services.ICourseService;
 import com.nk.learningplatformreactiveapi.services.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,18 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/users")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class UserController {
 
     private final IUserService service;
 
-    @Qualifier("userModelMapper")
+    // @Qualifier("userModelMapper")
     private final ModelMapper modelMapper;
+
+    public UserController(IUserService service, @Qualifier("userModelMapper") ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
     public Flux<UserDTO> readAll() {

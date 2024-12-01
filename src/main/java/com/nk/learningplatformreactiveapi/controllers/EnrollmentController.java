@@ -2,6 +2,7 @@ package com.nk.learningplatformreactiveapi.controllers;
 
 import com.nk.learningplatformreactiveapi.dto.EnrollmentDTO;
 import com.nk.learningplatformreactiveapi.entities.EnrollmentEntity;
+import com.nk.learningplatformreactiveapi.services.ICourseService;
 import com.nk.learningplatformreactiveapi.services.IEnrollmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,18 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/enrollments")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class EnrollmentController {
 
     private final IEnrollmentService service;
 
-    @Qualifier("enrollmentModelMapper")
+    // @Qualifier("enrollmentModelMapper")
     private final ModelMapper modelMapper;
+
+    public EnrollmentController(IEnrollmentService service, @Qualifier("enrollmentModelMapper") ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
     public Flux<EnrollmentDTO> readAll() {

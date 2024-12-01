@@ -1,0 +1,44 @@
+# Archivos y directorios de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de Git
+.git
+.gitignore
+
+# Archivos de entorno de desarrollo
+.env
+.env.local
+.env.*.local
+
+# Archivos de configuración de IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de compilación
+/dist/
+/build/
+/tmp/
+/out/
+
+# Directorios de logs
+*.log
+
+# Archivos de dependencias en Node.js
+node_modules/
+
+# Archivos de dependencias en PHP
+/vendor/
+
+# Archivos de dependencias en Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Archivos de Docker
+docker-compose.override.yml
+
+# Otros archivos no necesarios
+*.md
