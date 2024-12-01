@@ -4,9 +4,8 @@ updates:
   - package-ecosystem: "maven"
     directory: "/"  # Ruta del directorio donde está el archivo pom.xml
     schedule:
-      interval: "monthly"  # Puede ser daily, weekly, monthly
+      interval: "weekly"  # Puede ser daily, weekly, monthly
     commit-message:
-      prefix: "fix"  # Prefijo del mensaje de commit, puede ser 'fix' o 'chore'
-    versioning-strategy: "increase"  # Estrategia para incrementar las versiones
+      prefix: "fix"  # Prefijo del mensaje de commit
     allow:
       - dependency-type: "direct"  # Solo actualiza dependencias directas
