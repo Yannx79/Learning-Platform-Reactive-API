@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Configuración para actualizaciones de dependencias de Maven
+  - package-ecosystem: "maven"
+    directory: "/"  # Ruta del directorio donde está el archivo pom.xml
+    schedule:
+      interval: "monthly"  # Puede ser daily, weekly, monthly
+    commit-message:
+      prefix: "fix"  # Prefijo del mensaje de commit, puede ser 'fix' o 'chore'
+    versioning-strategy: "increase"  # Estrategia para incrementar las versiones
+    allow:
+      - dependency-type: "direct"  # Solo actualiza dependencias directas
